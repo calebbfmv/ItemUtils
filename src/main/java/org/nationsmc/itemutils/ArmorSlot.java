@@ -11,10 +11,10 @@ import java.util.List;
  */
 public enum ArmorSlot {
 
-    HELMET(new String[]{"helm", "helmet", "hat", "head", "1"}),
-    CHESTPLATE(new String[] {"chest", "chestplate", "chest_plate", "2"}),
-    PANTS(new String[]{"leggings", "pants", "legs", "3"}),
-    BOOTS(new String[]{"boots", "feet", "shoes", "4"});
+    HELMET("helm", "helmet", "hat", "head", "1"),
+    CHESTPLATE("chest", "chestplate", "chest_plate", "2"),
+    PANTS("leggings", "pants", "legs", "3"),
+    BOOTS("boots", "feet", "shoes", "4");
 
     private String[] vars;
     private static HashMap<String, ArmorSlot> slots = new HashMap<>();
@@ -31,7 +31,7 @@ public enum ArmorSlot {
         slots.put(var, this);
     }
 
-    private ArmorSlot(String[] vars){
+    private ArmorSlot(String... vars){
         this.vars = vars;
     }
 
