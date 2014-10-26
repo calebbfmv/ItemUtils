@@ -1,4 +1,4 @@
-name: HalloweenRank
+name: ItemUtils
 main: org.nationsmc.itemutils.ItemUtils
 version: ${project.version}
 author: calebbfmv
