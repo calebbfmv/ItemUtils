@@ -1,0 +1,5 @@
+name: HalloweenRank
+main: org.nationsmc.itemutils.ItemUtils
+version: ${project.version}
+author: calebbfmv
+description: An ItemUtility plugin for Developers
