@@ -1,9 +1,5 @@
 package org.nationsmc.itemutils;
 
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,10 +29,6 @@ public enum ArmorSlot {
 
     public void addVarToMemory(String var){
         slots.put(var, this);
-        ItemStack item = ItemBuilder.wrap(new ItemStack(Material.LEATHER_CHESTPLATE))
-                .name("See Brandon?")
-                .lore("Ur stoopid")
-                .build(Color.fromRGB(127, 243, 0));
     }
 
     private ArmorSlot(String... vars){
