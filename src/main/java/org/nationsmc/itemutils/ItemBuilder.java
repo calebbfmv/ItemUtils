@@ -31,7 +31,9 @@ public class ItemBuilder {
      * @return Wrapped item
      */
     public static ItemBuilder wrap(ItemStack item){
-        return new ItemBuilder();
+        ItemBuilder instance =  new ItemBuilder();
+        instance.setItem(item);
+        return instance;
     }
 
     /**
