@@ -33,7 +33,7 @@ public enum ArmorSlot {
 
     public void addVarToMemory(String var){
         slots.put(var, this);
-        ItemStack item = ItemFactory.wrap(new ItemStack(Material.LEATHER_CHESTPLATE))
+        ItemStack item = ItemBuilder.wrap(new ItemStack(Material.LEATHER_CHESTPLATE))
                 .name("See Brandon?")
                 .lore("Ur stoopid")
                 .build(Color.fromRGB(127, 243, 0));

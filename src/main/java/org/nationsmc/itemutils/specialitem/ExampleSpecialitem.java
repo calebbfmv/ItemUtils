@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.nationsmc.itemutils.GlowEnchant;
-import org.nationsmc.itemutils.ItemFactory;
+import org.nationsmc.itemutils.ItemBuilder;
 import org.nationsmc.itemutils.WrappedEnchantment;
 
 /**
@@ -17,7 +17,7 @@ import org.nationsmc.itemutils.WrappedEnchantment;
 public class ExampleSpecialitem extends SpecialItem{
 
     public ExampleSpecialitem() {
-        super(ItemFactory.wrap(new ItemStack(Material.EMERALD))
+        super(ItemBuilder.wrap(new ItemStack(Material.EMERALD))
         .name(ChatColor.GREEN + "Sparkly Emerald")
         .lore(ChatColor.GOLD + "Sparkly!!!!")
         .enchant(new WrappedEnchantment(GlowEnchant.getGlowEnchant()))

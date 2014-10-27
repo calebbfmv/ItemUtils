@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author Tim [calebbfmv]
  * Created by Tim [calebbfmv] on 10/22/2014.
  */
-public class ItemFactory {
+public class ItemBuilder {
 
     private ItemStack item;
     private String name;
@@ -20,7 +20,7 @@ public class ItemFactory {
     private ArmorSlot slot;
     private WrappedEnchantment[] enchantments;
 
-    private static ItemFactory instance = new ItemFactory();
+    private static ItemBuilder instance = new ItemBuilder();
 
     private void setItem(ItemStack item){
         this.item = item;
@@ -31,7 +31,7 @@ public class ItemFactory {
      * @param item The desired item
      * @return Wrapped item
      */
-    public static ItemFactory wrap(ItemStack item){
+    public static ItemBuilder wrap(ItemStack item){
         instance.lore = null;
         instance.name = null;
         instance.slot = null;
@@ -47,7 +47,7 @@ public class ItemFactory {
      * @param slot The armor slot
      * @return Wrapped Item
      */
-    public static ItemFactory wrap(ItemStack item, ArmorSlot slot){
+    public static ItemBuilder wrap(ItemStack item, ArmorSlot slot){
         wrap(item);
         instance.setSlot(slot);
         return instance;
@@ -57,7 +57,7 @@ public class ItemFactory {
      * Add a name to the itemstack
      * @param name The desired name
      */
-    public ItemFactory name(String name){
+    public ItemBuilder name(String name){
         this.name = name;
         return this;
     }
@@ -66,7 +66,7 @@ public class ItemFactory {
      * Add lore to the itemstack dynamically
      * @param lore The desired lore
      */
-    public ItemFactory lore(String... lore){
+    public ItemBuilder lore(String... lore){
         this.lore = lore;
         return this;
     }
@@ -75,7 +75,7 @@ public class ItemFactory {
      * Apply enchantments to the item
      * @param enchantments An array of WrappedEnchantment to be applied on building
      */
-    public ItemFactory enchant(WrappedEnchantment... enchantments){
+    public ItemBuilder enchant(WrappedEnchantment... enchantments){
         this.enchantments = enchantments;
         return this;
     }
