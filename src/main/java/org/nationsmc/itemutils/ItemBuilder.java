@@ -1,7 +1,6 @@
 package org.nationsmc.itemutils;
 
 import org.bukkit.Color;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -204,15 +203,5 @@ public class ItemBuilder {
         builder.append("\n");
         builder.append("}");
         return builder.toString();
-    }
-
-    public static void main(String[] args) {
-        ItemBuilder builder = ItemBuilder.wrap(new ItemStack(Material.LEATHER_CHESTPLATE));
-        builder.name("Sparkles");
-        builder.lore("I shine!", "Like a Diamond", "Oh wait", "I'm not a diamond", ":(");
-        builder.color(Color.RED);
-        builder.enchant(new WrappedEnchantment(GlowEnchant.getGlowEnchant()));
-        builder.slot(ArmorSlot.CHESTPLATE);
-        System.out.println(builder.toString());
     }
 }
