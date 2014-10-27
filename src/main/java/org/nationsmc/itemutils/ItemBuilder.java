@@ -20,7 +20,6 @@ public class ItemBuilder {
     private ArmorSlot slot;
     private WrappedEnchantment[] enchantments;
 
-    private static ItemBuilder instance = new ItemBuilder();
 
     private void setItem(ItemStack item){
         this.item = item;
@@ -32,13 +31,7 @@ public class ItemBuilder {
      * @return Wrapped item
      */
     public static ItemBuilder wrap(ItemStack item){
-        instance.lore = null;
-        instance.name = null;
-        instance.slot = null;
-        instance.item = null;
-        instance.enchantments = null;
-        instance.setItem(item);
-        return instance;
+        return new ItemBuilder();
     }
 
     /**
@@ -48,7 +41,7 @@ public class ItemBuilder {
      * @return Wrapped Item
      */
     public static ItemBuilder wrap(ItemStack item, ArmorSlot slot){
-        wrap(item);
+        ItemBuilder instance = wrap(item);
         instance.setSlot(slot);
         return instance;
     }
