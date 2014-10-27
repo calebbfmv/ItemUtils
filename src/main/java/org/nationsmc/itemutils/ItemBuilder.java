@@ -152,17 +152,20 @@ public class ItemBuilder {
     @Override
     public String toString(){
         StringBuilder builder = new StringBuilder();
+        builder.append("ItemBuilder: {");
+        builder.append("  name: ").append(name);
+        builder.append("  lore: ");
         if(lore == null){
             builder.append("null");
         } else {
-            for(int i = 0; i < lore.length; i++){
+            for (int i = 0; i < lore.length; i++) {
                 String s = lore[i];
                 builder.append(s);
-                if((i + 1) != lore.length){
+                if ((i + 1) != lore.length) {
                     builder.append(", ");
                 }
             }
         }
-        return "ItemFactory: Name: " + name + " Lore (\", \" indicates line break): " + builder.toString() + " ItemType: " + item.getType().name();
+        return builder.toString();
     }
 }
