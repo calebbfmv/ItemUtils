@@ -1,6 +1,7 @@
 package org.nationsmc.itemutils;
 
 import org.bukkit.Color;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,6 +19,7 @@ public class ItemBuilder {
     private String name;
     private String[] lore;
     private ArmorSlot slot;
+    private Color color;
     private WrappedEnchantment[] enchantments;
 
 
@@ -76,6 +78,28 @@ public class ItemBuilder {
     }
 
     /**
+     * Apply a color to the item.
+     * @param color The desired color
+     */
+    public ItemBuilder color(Color color){
+        if(!item.getType().name().toLowerCase().contains("leather_")) {
+            System.out.println("ItemBuilder: Tried setting color to a non leather material. Ignoring");
+            return this;
+        }
+        this.color = color;
+        return this;
+    }
+
+    /**
+     * Set the armor slot
+     * @param slot The desired slot
+     */
+    public ItemBuilder slot(ArmorSlot slot){
+        this.slot = slot;
+        return this;
+    }
+
+    /**
      * Built the item
      * @return the new item stack
      */
@@ -91,35 +115,20 @@ public class ItemBuilder {
             }
         }
         item.setItemMeta(meta);
-        return item;
-    }
-
-    /**
-     * Build the itemstack with a color.
-     * @param color the desired color for the item
-     * @return a build item, with color. Will return a normal item if it is not a leather armor piece.
-     */
-    public ItemStack build(Color color){
-        if(!item.getType().name().toLowerCase().contains("leather_")){
-            return build();
+        if(item.getType().name().toLowerCase().contains("leather_")) {
+            LeatherArmorMeta lMeta = (LeatherArmorMeta) item.getItemMeta();
+            lMeta.setColor(color);
+            item.setItemMeta(lMeta);
         }
-        item = build();
-        LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-        meta.setColor(color);
-        item.setItemMeta(meta);
         return item;
     }
 
     /**
      * Gives the built item to the player.
      * @param player The player to give the item to
-     * @param color optional color for leather armor
      */
-    public void give(Player player, Color color){
+    public void give(Player player){
         ItemStack item = build();
-        if(color != null){
-            item = build(color);
-        }
         ArmorSlot slot = getSlot();
         if(slot == null){
             player.getInventory().addItem(item);
@@ -153,11 +162,14 @@ public class ItemBuilder {
     public String toString(){
         StringBuilder builder = new StringBuilder();
         builder.append("ItemBuilder: {");
-        builder.append("  name: ").append(name);
-        builder.append("  lore: ");
+        builder.append("\n");
+        builder.append("name: ").append(name);
+        builder.append("\n");
+        builder.append("lore: ");
         if(lore == null){
             builder.append("null");
         } else {
+            builder.append("[");
             for (int i = 0; i < lore.length; i++) {
                 String s = lore[i];
                 builder.append(s);
@@ -165,7 +177,42 @@ public class ItemBuilder {
                     builder.append(", ");
                 }
             }
+            builder.append("]");
         }
+        builder.append("\n");
+        builder.append("color: ").append(color == null ? "null" : "Red: " + color.getRed() + " Green: " + color.getGreen() + " Blue: " + color.getBlue());
+        builder.append("\n");
+        builder.append("slot: ").append(slot == null ? "null" : slot.name());
+        builder.append("\n");
+        builder.append("enchantments: ");
+        if(enchantments == null){
+            builder.append("null");
+        } else {
+            builder.append("\n");
+            for(int i = 0; i < enchantments.length; i++){
+                WrappedEnchantment enchantment = enchantments[i];
+                builder.append("  name: ").append(enchantment.getEnchantment().getName())
+                        .append("\n")
+                        .append("  level: ").append(enchantment.getLevel())
+                        .append("\n")
+                        .append("  override: ").append(enchantment.isOverride());
+                if ((i + 1) != enchantments.length) {
+                    builder.append(", ");
+                }
+            }
+        }
+        builder.append("\n");
+        builder.append("}");
         return builder.toString();
+    }
+
+    public static void main(String[] args) {
+        ItemBuilder builder = ItemBuilder.wrap(new ItemStack(Material.LEATHER_CHESTPLATE));
+        builder.name("Sparkles");
+        builder.lore("I shine!", "Like a Diamond", "Oh wait", "I'm not a diamond", ":(");
+        builder.color(Color.RED);
+        builder.enchant(new WrappedEnchantment(GlowEnchant.getGlowEnchant()));
+        builder.slot(ArmorSlot.CHESTPLATE);
+        System.out.println(builder.toString());
     }
 }
